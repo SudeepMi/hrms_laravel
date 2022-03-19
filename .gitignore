@@ -1,0 +1,6 @@
+vendor
+node_modules
+.DS_Store
+storage/attendance
+storage/export
+
