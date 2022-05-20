@@ -1,6 +1,11 @@
 @extends('hrms.layouts.base')
 @section('content')
     <!-- START CONTENT -->
+    @if (session('success'))
+    <div class="alert alert-danger">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="content">
         <div class="row">
             <div class="col-md-8">
@@ -13,7 +18,7 @@
                                     placeholder="Share your status in 270 characters"
                                     style="padding-left:100px"></textarea>
                                     <label for="comment" class="field-icon">
-                                        <img src="{{isset(\Auth::user()->employee) ? \Auth::user()->employee->photo : '/assets/img/avatars/profile_pic.png'}}"
+                                        <img src="{{isset(\Auth::user()->employee->photo) ? \Auth::user()->employee->photo : '/assets/img/avatars/profile_pic.png'}}"
                                              width="80px" height="80px" style="padding-top: 10px; padding-left: 8px"
                                              class="img-responsive">
                                     </label>

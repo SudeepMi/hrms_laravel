@@ -8,6 +8,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\AssignProject;
+use Illuminate\Support\Arr;
 
 use App\Http\Requests;
 
@@ -24,7 +25,7 @@ class ProjectController extends Controller
     public function saveProject(Requests\AddProjectRequest $request)
     {
         $project = new Project();
-        $project->fill(array_except($request->all(), '_token'));
+        $project->fill(Arr::except($request->all(), '_token'));
         $project->save();
 
         \Session::flash('flash_message', 'Project added successfully');

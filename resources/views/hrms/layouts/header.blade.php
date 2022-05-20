@@ -1,7 +1,7 @@
 <header class="navbar navbar-fixed-top bg-system">
     <div class="navbar-logo-wrapper bg-system">
         <a class="navbar-logo-text" href="#">
-            <b> H R M S </b>
+            <b> O M S </b>
         </a>
 
         <span id="sidebar_left_toggle" class="ad ad-lines"></span>
@@ -14,6 +14,19 @@
         </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+        <li>
+            @if (Auth::user()->checkedIn())
+                <a class="dropdown-link" href="/checkout">
+                    <span class="glyphicon glyphicon-transfer"></span>
+                    <span class="hidden-xs">Check Out</span>
+                </a>
+            @else
+            <a class="dropdown-link" href="/checkin">
+                <span class="glyphicon glyphicon-user"></span>
+                <span class="hidden-xs">Check In</span>
+            </a>
+            @endif
+        </li>
         <li class="dropdown dropdown-fuse">
             <div class="navbar-btn btn-group">
         <li class="dropdown dropdown-fuse">

@@ -1,6 +1,8 @@
 <?php
 
 namespace App;
+
+use App\Models\Checkins;
 use App\Models\Employee;
 use App\Models\Project;
 use App\Models\UserRole;
@@ -84,6 +86,30 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function checkedIn(){
+        $userId = Auth::user()->id;
+        $checkin = Checkins::where('user_id', $userId)
+        ->where('created_at', '!=', null)
+        ->where('updated_at', '!=', null)
+        ->where('created_at','>', date('Y-m-d H:i:s', strtotime('-1 day')))
+        ->where('action', 'in')
+        ->first();
+        if($checkin){
+            $checkout = Checkins::where('user_id', $userId)
+            ->where('created_at', '!=', null)
+            ->where('updated_at', '!=', null)
+            ->where('updated_at','>', $checkin->created_at)
+            ->where('action', 'out')
+            ->first();
+            if($checkin && !$checkout){
+                return true;
+            }
+        }
+       
+         return false;
+    }
+    
 
     public function project()
     {

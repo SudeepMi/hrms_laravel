@@ -42,12 +42,13 @@
                                                 </div>
                                             @endif
                                             {!! Form::open(['class' => 'form-horizontal']) !!}
-
+                                               
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label"> Project </label>
                                                 <div class="col-md-6">
+                                                    {{ dd($model->project->name||0) }}
                                                     <input type="text" name="name" id="input002"
-                                                           class="select2-single form-control" placeholder="Name" value="{{$model->project->name}}"
+                                                           class="select2-single form-control" placeholder="Name" value="{{ dd($model->project->name) }}"
                                                            required>
                                                 </div>
                                             </div>

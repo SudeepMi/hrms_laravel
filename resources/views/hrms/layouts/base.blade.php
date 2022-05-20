@@ -481,7 +481,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <span class="footer-legal">Human Resource Management System © 2020 All rights reserved. By <a
-                                href="mailto:rayhan.zaman333@gmail.com?Subject=HRM%20Software" target="_blank">Rayhan Zaman</a></span>
+                                 target="_blank">Bibek Maharjan</a></span>
                 </div>
                 <div class="col-md-6 text-right">
                     <span class="footer-meta"></span>
