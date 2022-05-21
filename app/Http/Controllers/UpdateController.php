@@ -23,7 +23,6 @@ class UpdateController extends Controller
             $view = view('hrms.updates.status', ['post' => $posts]);
             $html = $view->render();
 
-
         }
         catch(\Exception $e)
         {

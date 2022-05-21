@@ -124,7 +124,7 @@ class EmpController extends Controller
 
     public function doEdit(Request $request, $id)
     {
-        $filename = 'a.png';
+        $filename = 'photos/profile_pic.png';
         if ($request->file('photo')) {
             $file             = $request->file('photo');
             $filename         = $this->str_random(12);

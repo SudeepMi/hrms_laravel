@@ -96,10 +96,10 @@
                                         <td class="text-center">{{$emp->name}}</td>
                                         <td class="text-center">{{($emp->employee) ? convertStatusBack($emp->employee["status"]) : "" }}</td>
                                         <td class="text-center">{{isset($emp->role->role->name)?$emp->role->role->name:''}}</td>
-                                        <td class="text-center">{{ $emp->employee && date('Y-m-d', strtotime($emp->employee['date_of_joining']))}}</td>
-                                        <td class="text-center">{{$emp->employee && $emp->employee['current_address']}}</td>
-                                        <td class="text-center">{{$emp->employee && $emp->employee['number']}}</td>
-                                        <td class="text-center">{{$emp->employee && $emp->employee['department']}}</td>
+                                        <td class="text-center">{{  date('Y-m-d', strtotime($emp->employee['date_of_joining']))}}</td>
+                                        <td class="text-center">{{ $emp->employee['current_address']}}</td>
+                                        <td class="text-center">{{ $emp->employee['number']}}</td>
+                                        <td class="text-center">{{ $emp->employee['department']}}</td>
                                         <td class="text-center">
                                             <div class="btn-group text-right">
                                                 <button type="button"

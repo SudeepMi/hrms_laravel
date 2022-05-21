@@ -41,7 +41,7 @@
                                         <div class="row">
                                             <div class="col-md-2">
                                                 @if(\Auth::user()->employee->photo)
-                                                    <img src="http://alliance-html.themerex.net/assets/img/avatars/profile_avatar.jpg"
+                                                    <img src="{{isset(\Auth::user()->employee->photo) ? \Auth::user()->employee->photo : '/assets/img/avatars/profile_pic.png'}}"
                                                          width="80px"
                                                          height="80px">
                                                     <br/>
@@ -83,7 +83,7 @@
                                     placeholder="Type your reply in 360 characters"
                                     style="padding-left:100px"></textarea>
                                                 <label for="comment" class="field-icon">
-                                                    <img src="http://alliance-html.themerex.net/assets/img/avatars/profile_avatar.jpg"
+                                                    <img src="{{isset(\Auth::user()->employee->photo) ? \Auth::user()->employee->photo : '/assets/img/avatars/profile_pic.png'}}"
                                                          width="80px" height="80px"
                                                          style="padding-top: 10px; padding-left: 8px">
                                                 </label>

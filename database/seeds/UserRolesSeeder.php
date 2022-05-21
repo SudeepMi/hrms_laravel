@@ -19,5 +19,23 @@ class UserRolesSeeder extends Seeder
                 'updated_at' => \Carbon\Carbon::now(),
             ],
         ]);
+
+        \DB::table('user_roles')->insert([
+            [
+                'role_id' => 2,
+                'user_id' => 2,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+        ]);
+
+        \DB::table('user_roles')->insert([
+            [
+                'role_id' => 3,
+                'user_id' => 3,
+                'created_at' => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now(),
+            ],
+        ]);
     }
 }

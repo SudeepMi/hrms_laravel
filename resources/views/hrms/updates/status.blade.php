@@ -50,9 +50,9 @@
                         </div>
                     </label>
                 </label>
-                <div id="loader-{{$post->id}}">
+                {{-- <div id="loader-{{$post->id}}">
                     <img src="{{ URL::asset('img/loader.gif') }}">
-                </div>
+                </div> --}}
             </div>
             <!-- /reply box -->
         </div>

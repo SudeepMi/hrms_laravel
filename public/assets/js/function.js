@@ -506,6 +506,8 @@ $('#post-update').click(function()
         var parsed = JSON.parse(data);
         if(parsed.status)
         {
+            alert("Post Saved");
+            location.reload();
             $('.append-post').prepend(parsed.html);
         }
         $('#post-button').css('padding-left', '90%');
