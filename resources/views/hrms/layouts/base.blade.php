@@ -316,7 +316,7 @@
         <!-- -------------- /Topbar Menu Wrapper -------------- -->
 
         <!-- YIELD CONTENT -->
-
+        {{-- fucker --}}
         @yield('content')
 
         <!-- /YIELD CONTENT -->
@@ -729,8 +729,6 @@ h
 @endif
     <script>
         $('#datetimepicker2').datetimepicker();
-
-
         (function($) {
             $.fn.blink = function(options) {
                 var defaults = {
@@ -768,17 +766,10 @@ h
 
 </script>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108812473-2"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'UA-108812473-2');
-</script>
 
 
 <script src="{{ URL::asset('assets/js/pages/allcp_forms-elements.js') }}"></script>
+
 </body>
 </html>

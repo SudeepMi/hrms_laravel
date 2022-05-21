@@ -42,9 +42,9 @@
                                     <span class="panel-title hidden-xs">  Checkings </span>
                                 </div>
                                 <div class="panel-body pn">
-                                    @if(Session::has('flash_message'))
-                                        <div class="alert alert-success">
-                                            {{ Session::get('flash_message') }}
+                                    @if(Session::has('success'))
+                                        <div class="alert alert-warning">
+                                            {{ Session::get('success') }}
                                         </div>
                                     @endif
                                     {!! Form::open(['class' => 'form-horizontal']) !!}
@@ -56,7 +56,8 @@
                                                 <th class="text-center">Date</th>
                                                 <th class="text-center">Checkin Time</th>
                                                 <th class="text-center">Checkout Time</th>
-                                                <th class="text-center">Status</th>
+
+                                                <th class="text-center">Remark</th>
                                             </tr>
                                             </thead>
 
@@ -67,7 +68,8 @@
                                                     <td class="text-center">{{ \Carbon\Carbon::parse($client->created_at)->isoFormat('MMM Do YY'); }}</td>
                                                     <td class="text-center">{{ \Carbon\Carbon::parse($client->created_at)->isoFormat('h:mm:ss a'); }}</td>
                                                     <td class="text-center">{{$client->action=="out" ? \Carbon\Carbon::parse($client->updated_at)->isoFormat('h:mm:ss a') : ''}}</td>
-                                                    <td class="text-center">{{ \Carbon\Carbon::createFromTimestamp(strtotime($client->created_at))->diffForHumans()}}</td>
+                                                    
+                                                    <td class="text-center">{{$client->late==0?"On Time":$client->late."Mins Late"}}</td>
                                                   
                                                 </tr>
                                             @endforeach

@@ -15,6 +15,8 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
         <li>
+            @if(!\Auth::user()->isAd())
+              
             @if (Auth::user()->checkedIn())
                 <a class="dropdown-link" href="/checkout">
                     <span class="glyphicon glyphicon-transfer"></span>
@@ -25,6 +27,15 @@
                 <span class="glyphicon glyphicon-user"></span>
                 <span class="hidden-xs">Check In</span>
             </a>
+            @endif
+            @endif
+        </li>
+        <li>
+            @if (Auth::user()->checkedIn())
+                <a class="dropdown-link" href="#">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                    <span class="hidden-xs">{{ Auth::user()->lastCheckIn() }}</span>
+                </a>
             @endif
         </li>
         <li class="dropdown dropdown-fuse">

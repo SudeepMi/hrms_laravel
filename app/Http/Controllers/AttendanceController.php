@@ -4,7 +4,8 @@
 
   use App\Models\AttendanceManager;
   use App\Models\AttendanceFilename;
-  use App\Repositories\ExportRepository;
+use App\Models\Checkins;
+use App\Repositories\ExportRepository;
   use App\Repositories\ImportAttendanceData;
   use App\Repositories\UploadRepository;
 
@@ -82,7 +83,8 @@
       $string = '';
       $dateFrom = '';
       $dateTo = '';
-      $attendances = AttendanceManager::paginate(20);
+      $attendances = Checkins::paginate(10);
+      // dd($attendances);
       return view('hrms.attendance.show_attendance_sheet_details', compact('attendances', 'column', 'string', 'dateFrom', 'dateTo'));
     }
 

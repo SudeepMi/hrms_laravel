@@ -56,11 +56,12 @@ class EmpController extends Controller
 
         $user           = new User;
         $user->name     = $request->emp_name;
-        $user->email    = str_replace(' ', '_', $request->emp_name) . '@sipi-ip.sg';
+        $user->email    = str_replace(' ', '_', $request->emp_name) . '@oms.sg';
         $user->password = bcrypt('123456');
         $user->save();
 
         $emp                       = new Employee;
+        $emp->time_in              = '09:00:00';
         $emp->photo                = $filename;
         $emp->name                 = $request->emp_name;
         $emp->code                 = $request->emp_code;
@@ -123,7 +124,7 @@ class EmpController extends Controller
 
     public function doEdit(Request $request, $id)
     {
-        $filename = public_path('photos/a.png');
+        $filename = 'a.png';
         if ($request->file('photo')) {
             $file             = $request->file('photo');
             $filename         = $this->str_random(12);
@@ -133,12 +134,12 @@ class EmpController extends Controller
             if (!in_array($fileExt, $allowedExtension)) {
                 return redirect()->back()->with('message', 'Extension not allowed');
             }
-            $filename = $filename . '.' . $fileExt;
+            $filename = 'photos'.$filename . '.' . $fileExt;
             $file->move($destinationPath, $filename);
 
         }
-
-        $photo             = $request->$filename;
+        $time_in = date_format(date_create($request->time_in), 'H:i:s');
+        $photo             = $filename;
         $emp_name          = $request->name;
         $emp_code          = $request->code;
         $emp_status        = $request->status;
@@ -175,6 +176,7 @@ class EmpController extends Controller
         if (!empty($photo)) {
             $edit->photo = $photo;
         }
+        $edit->time_in = $time_in;
         if (!empty($emp_name)) {
             $edit->name = $emp_name;
         }
@@ -575,9 +577,10 @@ class EmpController extends Controller
 
     public function processPromotion(Request $request)
     {
-
+       
         $newDesignation  = Role::where('id', $request->new_designation)->first();
         $process         = Employee::where('id', $request->emp_id)->first();
+        
         $process->salary = $request->new_salary;
         $process->save();
 

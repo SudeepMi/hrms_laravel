@@ -16,7 +16,7 @@ class CheckinController extends Controller
         $checkin = $checkins->last();
         if( $checkin && \Carbon\Carbon::parse($checkin->updated_at)->day == Carbon::now()->day )
         {
-            return redirect('/home')->with('success', 'You have already checked in today.');
+            return redirect('/checkin-list')->with('success', 'You have already checked in today.');
         }
 
         if(Auth::user()->checkedIn()){
@@ -26,10 +26,19 @@ class CheckinController extends Controller
         $checkin = new Checkins();
         $checkin->user_id = Auth::user()->id;
         $checkin->action = 'in';
+        $checkin->late =  \Carbon\Carbon::parse(Auth::user()->employee->time_in)->diffInMinutes(\Carbon\Carbon::now(), false);
+        if($checkin->late<0){
+            $checkin->late = 0;
+        }
         $checkin->save();
         $checkin = Checkins::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
         
         return view('hrms.checkin.index', compact('checkin'))->with('success', 'Checked In');
+    }
+
+    public function showCheckin(){
+        $checkin = Checkins::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        return view('hrms.checkin.index', compact('checkin'));
     }
 
     public function checkout()
@@ -40,9 +49,9 @@ class CheckinController extends Controller
             $checkin->action = 'out';
             $checkin->save();
             $checkin =  Checkins::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
-            return redirect('home')->with('success', 'Checked Out');
+            return redirect('checkin-list')->with('success', 'Checked Out');
         }
-        return redirect('home')->with('error', 'You are already checked out');
+        return redirect('checkin-list')->with('error', 'You are already checked out');
     }
 
 

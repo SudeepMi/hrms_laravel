@@ -91,14 +91,12 @@
                                         <thead>
                                         <tr class="bg-light">
                                             <th class="text-center">Id</th>
-                                            <th class="text-center">Code</th>
                                             <th class="text-center">Name</th>
                                             <th class="text-center">Date</th>
                                             <th class="text-center">Day</th>
                                             <th class="text-center">In Time</th>
                                             <th class="text-center">Out Time</th>
                                             <th class="text-center">Hours Worked</th>
-                                            <th class="text-center">Difference</th>
                                             <th class="text-center">Status</th>
                                             <th class="text-center">Leave Status</th>
                                             <th class="text-center">Action</th>
@@ -112,33 +110,15 @@
                                         @foreach($attendances as $attendance)
                                             <tr>
                                                 <td class="text-center">{{$i+=1}}</td>
-                                                <td class="text-center">{{$attendance->code}}</td>
-                                                <td class="text-center">{{$attendance->name}}</td>
-                                                <td class="text-center">{{getFormattedDate($attendance->date)}}</td>
-                                                <td class="text-center">{{$attendance->day}}</td>
-                                                <td class="text-center">{{$attendance->in_time}}</td>
-                                                <td class="text-center">{{$attendance->out_time}}</td>
-                                                <td class="text-center">{{round($attendance->hours_worked,2)}}</td>
-                                                <td class="text-center">{{$attendance->difference}}</td>
-                                                <td class="text-center">{{convertAttendanceFrom($attendance->status)}}</td>
-                                                <td class="text-center">{{$attendance->leave_status}}</td>
-                                                <td class="text-center">
-                                                    <div class="btn-group text-center">
-                                                        <button type="button"
-                                                                class="btn btn-info br2 btn-xs fs12 dropdown-toggle"
-                                                                data-toggle="dropdown" aria-expanded="false"> Action
-                                                            <span class="caret ml5"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li>
-                                                                <a href="#">Edit</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#">Delete</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </td>
+                                                <td class="text-center">{{$attendance->userName()}}</td>
+                                                <td class="text-center">{{getFormattedDate($attendance->created_at)}}</td>
+                                                <td class="text-center">{{ \Carbon\Carbon::parse($attendance->created_at)->englishDayOfWeek;}}</td>
+                                                <td class="text-center">{{\Carbon\Carbon::parse($attendance->created_at)->isoFormat('h:mm a');}}</td>
+                                                <td class="text-center">{{$attendance->action=="out" ? \Carbon\Carbon::parse($attendance->updated_at)->isoFormat('h:mm a') : ''}}</td>
+                                                <td class="text-center">{{ $attendance->action=="out" ? \Carbon\Carbon::parse($attendance->updated_at)->diffInRealHours(\Carbon\Carbon::parse($attendance->created_at)) : ''}}</td>
+                                                <td class="text-center">{{$attendance->late}}</td>
+                                                <td class="text-center">{{"0 remaining"}}</td>
+                                                
                                             </tr>
                                         @endforeach
                                         <tr><td colspan="11">

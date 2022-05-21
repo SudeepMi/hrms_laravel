@@ -12,8 +12,9 @@ class EmployeeSeeder extends Seeder
     public function run()
     {
         \DB::table('employees')->insert([
-            'photo' => '',
+            'photo' => 'photos\wp6UaPqyX909.jpg',
             'code' => 'HR0001',
+            'time_in' => '09:00:00',
             'status' => '1',
             'name' => 'HR Manager',
             'gender' => '1',

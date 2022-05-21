@@ -159,6 +159,7 @@ Route::group(['middleware' => ['auth']], function ()
     // Checkin Routes
     Route::get('checkin', ['as' => 'checkin', 'uses' => 'CheckinController@index']);
     Route::get('checkout', ['as' => 'checkout', 'uses' => 'CheckinController@checkout']);
+    Route::get('checkin-list', ['as' => 'checkin-list', 'uses' => 'CheckinController@showCheckin']);
 
     // //Routes for Assets.
 
@@ -316,13 +317,11 @@ Route::group(['middleware' => ['auth']], function ()
 
     Route::get('edit-project/{projectId}', 'ProjectController@showEdit')->name('edit-project-get');
 
-    Route::post('edit-project/{projectId}', 'ProjectController@saveProjectEdit');
 
     Route::get('list-project', 'ProjectController@listProject')->name('list-project');
 
-    Route::get('edit-project/{id}', ['as' => 'edit-project-get', 'uses' => 'ProjectController@showEdit']);
 
-    Route::post('edit-project/{id}', ['as' => 'edit-project', 'uses' => 'ProjectController@doEdit']);
+    Route::post('update-project/{id}', ['as' => 'update-project', 'uses' => 'ProjectController@doEdit']);
 
     Route::get('delete-project/{id}', ['as' => 'delete-project', 'uses' => 'ProjectController@doDelete']);
 
@@ -335,11 +334,11 @@ Route::group(['middleware' => ['auth']], function ()
 
     Route::get('edit-project-assignment/{id}', ['as' => 'edit-project-assignment', 'uses' => 'ProjectController@showEditAssign']);
 
-    Route::post('edit-project-assignment/{id}', ['as' => 'edit-project-assignment', 'uses' => 'ProjectController@doEditAssign']);
+    Route::post('update-project-assignment/{id}', ['as' => 'update-project-assignment', 'uses' => 'ProjectController@doEditAssign']);
 
     Route::get('delete-project-assignment/{id}', ['as' => 'delete-project-assignment', 'uses' => 'ProjectController@doDeleteAssign']);
 
 
-    Route::get('assign-project', 'ProjectController@assignProject')->name('assign-project');
+    #Route::get('assign-project', 'ProjectController@assignProject')->name('assign-project');
 
 });

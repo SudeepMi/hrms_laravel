@@ -53,6 +53,24 @@ class User extends Authenticatable
         return false;
     }
 
+    public function isAd()
+    {
+        $userId = Auth::user()->id;
+        $userRole = UserRole::where('user_id', $userId)->first();
+        if($userRole->role_id == 1)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public function lastCheckIn(){
+        $userId = Auth::user()->id;
+        $checkin = Checkins::where('user_id', $userId)->orderBy('id', 'desc')->first();
+        $checkin = \Carbon\Carbon::createFromTimestamp(strtotime($checkin->created_at))->diffForHumans();
+        return $checkin;
+    }
+
     public function notAnalyst()
     {
         $userId = Auth::user()->id;
@@ -109,7 +127,7 @@ class User extends Authenticatable
        
          return false;
     }
-    
+
 
     public function project()
     {

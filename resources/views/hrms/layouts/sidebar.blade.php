@@ -296,7 +296,7 @@
             </li>
         </ul>
     </li>
-    @if (Auth::user()->isHR())
+    @if (Auth::user())
         <li>
             <a class="accordion-toggle" href="#">
                 <span class="fa fa-clock-o"></span>
@@ -304,16 +304,20 @@
                 <span class="caret"></span>
             </a>
             <ul class="nav sub-nav">
-                <li>
+                <li> @if (Auth::user()->isHR())
                     <a href="{{ route('attendance-upload') }}">
                         <span class="glyphicon glyphicon-book"></span> Upload Sheets</a>
-                    <a href="{{ route('attendance-manager') }}">
-                        <span class="glyphicon glyphicon-book"></span> Manage Attendance</a>
+                        @endif
+                    {{-- <a href="{{ route('attendance-manager') }}">
+                        <span class="glyphicon glyphicon-book"></span> Manage Attendance</a> --}}
+                        <a href="{{ route('checkin-list') }}">
+                            <span class="glyphicon glyphicon-book"></span> My Attendance</a>
                 </li>
 
             </ul>
         </li>
-
+    @endif
+        @if (Auth::user()->isHR())
         <li>
             <a class="accordion-toggle" href="#">
                 <span class="fa fa-tree"></span>

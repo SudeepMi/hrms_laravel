@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('checkins', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-          
+            $table->string('late')->nullable();
             $table->string('action');
             $table->timestamps();
         });
