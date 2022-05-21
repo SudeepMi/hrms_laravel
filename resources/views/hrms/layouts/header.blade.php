@@ -13,7 +13,39 @@
             </a>
         </li>
     </ul>
+    @php
+        $notifications = \App\Models\Notification::where('recipients', Auth::user()->id)->limit(5)->get();
+    @endphp
     <ul class="nav navbar-nav navbar-right">
+        <li>
+            @if (Auth::user())
+            <li class="dropdown dropdown-fuse">
+                <a href="#" class="dropdown-toggle fw600" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-bell hidden-xs mr15"></span>
+                </a>
+                </a>
+                
+                    <ul class="dropdown-menu list-group keep-dropdown w250" role="menu">
+                        @foreach ($notifications as $notification)
+                       
+                            <li class="list-group-item">
+                                {{-- <a href="{{ route('notification.show', $notification->id) }}"> --}}
+                                <a href="#" class="mx-2">
+                                    <span class="fa fa-envelope mr2"></span>
+                                    <span class="mx-2 d-block">{{ $notification->data }}</span><br/>
+                                    <span class="mx-2 d-block ml5">{{ \Carbon\Carbon::createFromTimestamp(strtotime($notification->created_at))->diffForHumans(); }}</span>
+                                </a>
+                            </li>
+                        @endforeach
+                        <li class="dropdown-footer text-center">
+                            <a href="{{ route('all-notifications') }}">
+                            {{-- <a href="#"> --}}
+                                View All Notifications</a>
+                        </li>
+                    </ul>
+            </li>
+            @endif
+        </li>
         <li>
             @if(!\Auth::user()->isAd())
               

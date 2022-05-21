@@ -478,11 +478,11 @@
       $remarks = $request->remarks;
       $employeeLeave = EmployeeLeaves::where('id', $leaveId)->first();
       $user = User::where('id', $employeeLeave->user_id)->first();
-      $this->mailer->send('emails.leave_status', ['user' => $user, 'status' => 'approved', 'remarks' => $remarks ,'leave' => $employeeLeave], function($message) use($user)
-      {
-        $message->from('no-reply@dipi-ip.com', 'Digital IP Insights');
-        $message->to($user->email,$user->name)->subject('Your leave has been approved');
-      });
+      // $this->mailer->send('emails.leave_status', ['user' => $user, 'status' => 'approved', 'remarks' => $remarks ,'leave' => $employeeLeave], function($message) use($user)
+      // {
+      //   $message->from('no-reply@dipi-ip.com', 'Digital IP Insights');
+      //   $message->to($user->email,$user->name)->subject('Your leave has been approved');
+      // });
 
 
       \DB::table('employee_leaves')->where('id', $leaveId)->update(['status' => '1', 'remarks' => $remarks]);

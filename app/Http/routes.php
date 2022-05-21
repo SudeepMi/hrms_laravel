@@ -338,6 +338,7 @@ Route::group(['middleware' => ['auth']], function ()
 
     Route::get('delete-project-assignment/{id}', ['as' => 'delete-project-assignment', 'uses' => 'ProjectController@doDeleteAssign']);
 
+    Route::get('all-notifications', ['as' => 'all-notifications', 'uses' => 'NotificationController@showAll']);
 
     #Route::get('assign-project', 'ProjectController@assignProject')->name('assign-project');
 

@@ -39,7 +39,7 @@ class EmpController extends Controller
 
     public function processEmployee(Request $request)
     {
-        $filename = public_path('photos/a.png');
+        $filename = public_path('photos/profile_pic.png');
         if ($request->file('photo')) {
             $file             = $request->file('photo');
             $filename         = $this->str_random(12);
@@ -62,7 +62,7 @@ class EmpController extends Controller
 
         $emp                       = new Employee;
         $emp->time_in              = '09:00:00';
-        $emp->photo                = $filename;
+        $emp->photo                = 'photos'.$filename;
         $emp->name                 = $request->emp_name;
         $emp->code                 = $request->emp_code;
         $emp->status               = $request->emp_status;
