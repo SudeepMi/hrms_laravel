@@ -117,8 +117,8 @@ class EmpController extends Controller
     {
         //$emps = Employee::whereid($id)->with('userrole.role')->first();
         $emps = User::where('id', $id)->with('employee', 'role.role')->first();
-
         $roles = Role::get();
+        
         return view('hrms.employee.add', compact('emps', 'roles'));
     }
 
@@ -134,7 +134,7 @@ class EmpController extends Controller
             if (!in_array($fileExt, $allowedExtension)) {
                 return redirect()->back()->with('message', 'Extension not allowed');
             }
-            $filename = 'photos'.$filename . '.' . $fileExt;
+            $filename = 'photos/'.$filename . '.' . $fileExt;
             $file->move($destinationPath, $filename);
 
         }
@@ -471,9 +471,7 @@ class EmpController extends Controller
             } elseif ($column == 'email') {
                 $emps = User::with('employee')->where($column, $string)->paginate(20);
             } else {
-                $emps = User::whereHas('employee', function ($q) use ($column, $string) {
-                    $q->whereRaw($column . " like '%" . $string . "%'");
-                })->with('employee')->paginate(20);
+                $emps = User::with('employee')->where($column,'LIKE',"%{$string}%")->paginate(20);
             }
 
             return view('hrms.employee.show_emp', compact('emps', 'column', 'string'));

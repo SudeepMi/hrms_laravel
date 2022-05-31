@@ -28,7 +28,7 @@ class CheckinObserver
         foreach($allCheckins as $checkin) {
             $totalLate += $checkin->late;
         }
-        if($totalLate >= 1440) {
+        if($totalLate >= 480) {
             $notification = new Notification();
             $username = $checkins->userName();
             $notification->data = $username.' have been late for '.$totalLate.' minutes [ Equal to 1 day ]';

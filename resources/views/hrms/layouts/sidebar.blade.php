@@ -202,7 +202,7 @@
         </ul>
     </li>
 
-    @if (Auth::user()->isHR())
+    @if (Auth::user()->isAd())
         <li>
             <a class="accordion-toggle" href="/dashboard">
                 <span class="fa fa-arrow-circle-o-up"></span>
@@ -304,7 +304,7 @@
                 <span class="caret"></span>
             </a>
             <ul class="nav sub-nav">
-                <li> @if (Auth::user()->isHR())
+                <li> @if (Auth::user()->isAd())
                     <a href="{{ route('attendance-upload') }}">
                         <span class="glyphicon glyphicon-book"></span> Upload Sheets</a>
                         @endif
@@ -368,6 +368,14 @@
             <span class="sidebar-title"> Company Policy </span>
         </a>
     </li>
+
+    <li>
+        <a href="/proof-of-work">
+            <span class="fa fa-gavel"></span>
+            <span class="sidebar-title"> Proof of work </span>
+        </a>
+    </li>
+
     <p> &nbsp; </p>
 </ul>
 <!-- -------------- /Sidebar Menu  -------------- -->

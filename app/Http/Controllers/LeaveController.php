@@ -14,8 +14,9 @@
 
   use Illuminate\Http\Request;
   use App\Http\Requests;
-  use Illuminate\Support\Facades\Input;
+  // use Illuminate\Support\Facades\Input;
   use Maatwebsite\Excel\Facades\Excel;
+// use Symfony\Component\Console\Input\Input;
 
   class LeaveController extends Controller
   {
@@ -529,23 +530,21 @@
     {
       try
       {
-        if(Input::hasFile('upload_file'))
+        if($request->hasFile('upload_file'))
         {
-          $file = Input::file('upload_file');
+          $file = $request->file('upload_file');
           $allowedext = ["xlsx", "xls"];
           $extension = $file->getClientOriginalExtension();
           $filename = $file->getClientOriginalName();
-
-
           if(in_array($extension, $allowedext))
           {
 
             //move this file to storage path
-            $file->move(storage_path('holidays/'), $filename);
+              $file->move(storage_path('holidays/'), $filename);
               $holiday = new HolidayFilenames();
               $holiday->name = $filename;
               $holiday->description = $request->description;
-              $holiday->date = date_format(date_create($request->date), 'Y-m-d');
+              $holiday->date = $request->date;
               $holiday->save();
 
           } else
@@ -555,22 +554,15 @@
             return redirect()->back();
           }
 
-          Excel::load(storage_path('holidays/' . $filename), function ($reader)
-          {
-            $rows = $reader->get(['occasion', 'date_from', 'date_to']);
-
-            foreach($rows as $row)
-            {
-              $holiday = new Holiday();
-              $holiday->occasion = $row->occasion;
-              $holiday->date_from = $row->date_from;
-              $holiday->date_to = $row->date_to;
-              $holiday->save();
-            }
-              return redirect()->back()->with('flash_message', 'Holidays successfully added');
-          });
+          
+          Excel::store($file,storage_path('holidays/' . $filename),"",null,[]);
+          
+        
+            // });
+            return redirect()->back()->with('flash_message', 'Holidays successfully added');
+          }
+          
         }
-      }
       catch(\Exception $e)
       {
         \Log::info($e->getMessage());

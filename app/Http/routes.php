@@ -31,6 +31,13 @@ Route::group(['middleware' => ['guest']], function ()
 
 Route::group(['middleware' => ['auth']], function ()
 {
+    Route::get('/proof-of-work', 'HomeController@pow');
+    Route::get('/add-proof-of-work', 'HomeController@add_pow');
+    Route::post('/add-proof-of-work', 'HomeController@addPow');
+    Route::get('/chatbox', 'HomeController@chatPage');
+    Route::post('/save-chat', 'HomeController@addChat');
+
+
 
     Route::get('home', 'HomeController@index');
 
@@ -316,12 +323,13 @@ Route::group(['middleware' => ['auth']], function ()
     Route::post('add-project', 'ProjectController@saveProject');
 
     Route::get('edit-project/{projectId}', 'ProjectController@showEdit')->name('edit-project-get');
+    Route::post('edit-project/{id}', ['as' => 'edit-project', 'uses' => 'ProjectController@doEdit']);
 
 
     Route::get('list-project', 'ProjectController@listProject')->name('list-project');
 
 
-    Route::post('update-project/{id}', ['as' => 'update-project', 'uses' => 'ProjectController@doEdit']);
+    // Route::post('update-project/{id}', ['as' => 'update-project', 'uses' => 'ProjectController@doEdit']);
 
     Route::get('delete-project/{id}', ['as' => 'delete-project', 'uses' => 'ProjectController@doDelete']);
 

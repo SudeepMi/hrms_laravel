@@ -762,6 +762,34 @@ h
             }); // causes a 1500ms blink interval.
         });
 
+    $('#chat_form').submit(function(e){
+    e.preventDefault();
+    var msg = $('#msg').val();
+    var url = "/save-chat";
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            message: msg,
+            _token: "{{csrf_token()}}"
+        },
+        success: function(data){
+            console.log(data);
+            $('#msg').val('');
+            $('#chat_form').trigger('reset');
+            let list = `<li class=${data.data.user.id=={{ \Auth::user()->id }} ? "sent" : "rec"}><a href="#"><span class="thumb-sm pull-left mr">
+                    <img class="img-circle" src="http://localhost:8000/assets/img/avatars/profile_pic.png" alt="..." width="50px">
+                        </span><span class="ml"><span class="text-dark">${data.data.message}</span><br>
+                        <span class="text-muted">${data.data.user.name}</span>
+                        <small class="text-muted">${new Date(data.data.created_at).toLocaleDateString()}</small>
+                    </span>
+                                      </a>
+                                 </li>`
+            $('#chatitems').append(list);
+        }
+    });
+});
+
         /////////////////////////////////////////////
 
 </script>

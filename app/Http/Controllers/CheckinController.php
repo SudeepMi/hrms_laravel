@@ -43,14 +43,20 @@ class CheckinController extends Controller
 
     public function checkout()
     {
-        $checkins = Checkins::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $checkins = Checkins::where('user_id', Auth::user()->id)->orderBy('created_at', 'asc')->get();
         $checkin = $checkins->last();
         if($checkin->action == 'in'){
             $checkin->action = 'out';
             $checkin->save();
-            $checkin =  Checkins::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+            $checkin =  Checkins::where('user_id', Auth::user()->id)->orderBy('created_at', 'asc')->get();
+            // dd($checkin);
+        \Session::flash('flash_message', 'You are already checked out');
             return redirect('checkin-list')->with('success', 'Checked Out');
         }
+
+            // dd($checkin);
+        
+        \Session::flash('flash_message', 'You are already checked out');
         return redirect('checkin-list')->with('error', 'You are already checked out');
     }
 

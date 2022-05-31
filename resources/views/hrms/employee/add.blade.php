@@ -349,7 +349,7 @@
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40">Employee Code</h6></label>
                                         <label for="input002" class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps && $emps->employee)
                                                 <input type="text" name="emp_code" id="emp_code" class="gui-input"
                                                        value="@if($emps && $emps->employee->code){{$emps->employee->code}}@endif" required>
                                                 <label for="input002" class="field-icon">
@@ -369,7 +369,7 @@
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40">Employee Name </h6></label>
                                         <label for="input002" class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}'  && $emps && $emps->employee)
                                                 <input type="text" name="emp_name" id="emp_name" class="gui-input"
                                                        value="@if($emps && $emps->employee->name){{$emps->employee->name}}@endif" required>
                                                 <label for="input002" class="field-icon">
@@ -390,13 +390,13 @@
                                         <label for="input002"><h6 class="mb20 mt40">Employment Status </h6></label>
                                         <div class="option-group field">
                                             <label class="field option mb5">
-                                                @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                                @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}'  && $emps && $emps->employee)
                                                 <input type="radio" name="emp_status" id="emp_status" value="1"
-                                                       @if(isset($emps))@if($emps->employee->status == '1') checked @endif @endif>
+                                                       @if(isset($emps->employee))@if($emps->employee->status == '1') checked @endif @endif>
                                                 <span class="radio"></span>Present</label>
                                             <label class="field option mb5">
                                                 <input type="radio" name="emp_status" id="emp_status" value="0"
-                                                       @if(isset($emps))@if($emps->employee->status == '0') checked @endif @endif>
+                                                       @if(isset($emps->employee))@if($emps->employee->status == '0') checked @endif @endif>
                                                 <span class="radio"></span>Ex</label>
                                             @else
                                                 <input type="radio" name="emp_status" id="emp_status" value="1">
@@ -410,7 +410,7 @@
 
                                         <div class="section">
                                             <label for="input002"><h6 class="mb20 mt40"> Role </h6></label>
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps && $emps->employee)
                                                 <select class="select2-single form-control" name="role" id="role" readonly required>
                                                     <option value="">Select role</option>
                                                     @foreach($roles as $role)
@@ -435,11 +435,11 @@
                                         <div class="option-group field">
                                             <label class="field option mb5">
                                                 <input type="radio" value="0" name="gender" id="gender"
-                                                       @if(isset($emps))@if($emps->employee->gender == '0')checked @endif @endif>
+                                                       @if(($emps->employee))@if($emps->employee->gender == '0')checked @endif @endif>
                                                 <span class="radio"></span>Male</label>
                                             <label class="field option mb5">
                                                 <input type="radio" value="1" name="gender" id="gender"
-                                                       @if(isset($emps))@if($emps->employee->gender == '1')checked @endif @endif>
+                                                       @if(($emps->employee))@if($emps->employee->gender == '1')checked @endif @endif>
                                                 <span class="radio"></span>Female</label>
                                         </div>
                                     </div>
@@ -450,7 +450,7 @@
                                                 Date of Birth </h6></label>
 
                                         <div class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                 <input type="text" id="datepicker1" class="gui-input fs13" name="dob"
                                                        value="@if($emps && $emps->employee->date_of_birth){{$emps->employee->date_of_birth}}@endif" required>
                                                 <label class="field-icon">
@@ -473,7 +473,7 @@
                                         <div class="field prepend-icon">
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
                                                 <input type="text" id="datepicker4" class="gui-input fs13" name="doj"
-                                                       value="@if($emps && $emps->employee->date_of_joining){{$emps->employee->date_of_joining}}@endif" required>
+                                                       value="@if($emps->employee && $emps->employee->date_of_joining){{$emps->employee->date_of_joining}}@endif" required>
                                                 <label class="field-icon">
                                                     <i class="fa fa-calendar"></i>
                                                 </label>
@@ -493,7 +493,7 @@
                                             @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
                                                 <input type="number" name="mob_number" id="mobile_phone"
                                                        class="gui-input phone-group" maxlength="10" minlength="10" required
-                                                       value="@if($emps && $emps->employee->number){{$emps->employee->number}}@endif">
+                                                       value="@if($emps->employee && $emps->employee->number){{$emps->employee->number}}@endif">
                                                 <label for="input002" class="field-icon">
                                                     <i class="fa fa-mobile-phone"></i>
                                                 </label>
@@ -511,7 +511,7 @@
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> Qualification </h6></label>
                                         <label for="input002" class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
 
                                                 {!! Form::select('qualification_list', qualification(),$emps->employee->qualification, ['class' => 'select2-single form-control qualification_select', 'id' => 'qualification']) !!}
                                                 <input type="text" id="qualification" class="gui-input form-control hidden qualification_text" placeholder="enter other qualification" value="{{$emps->employee->qualification}}"/>
@@ -527,10 +527,10 @@
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> Emergency Number </h6></label>
                                         <label for="input002" class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                 <input type="number" name="emer_number" id="emergency_number"
                                                        class="gui-input phone-group" maxlength="10" minlength="10"
-                                                       value="@if($emps && $emps->employee->emergency_number){{$emps->employee->emergency_number}}@endif">
+                                                       value="@if($emps->employee && $emps->employee->emergency_number){{$emps->employee->emergency_number}}@endif">
                                                 <label for="input002" class="field-icon">
                                                     <i class="fa fa-mobile-phone"></i>
                                                 </label>
@@ -549,7 +549,7 @@
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> PAN Number </h6></label>
                                         <label for="input002" class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                 <input type="text" name="pan_number" id="pan_number" class="gui-input"
                                                        value="@if($emps && $emps->employee->pan_number){{$emps->employee->pan_number}}@endif">
                                             @else
@@ -564,7 +564,7 @@
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> Father's Name </h6></label>
                                         <label for="input002" class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                 <input type="text" name="father_name" id="father_name" class="gui-input"
                                                        value="@if($emps && $emps->employee->father_name){{$emps->employee->father_name}}@endif">
 
@@ -580,7 +580,7 @@
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> Current Address </h6></label>
                                         <label for="input002" class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                 <input type="text" name="address" id="address" class="gui-input"
                                                        value="@if($emps && $emps->employee->current_address){{$emps->employee->current_address}}@endif">
                                                 <label for="input002" class="field-icon">
@@ -600,7 +600,7 @@
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> Permanent Address </h6></label>
                                         <label for="input002" class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                 <input type="text" name="permanent_address" id="permanent_address"
                                                        class="gui-input"
                                                        value="@if($emps && $emps->employee->permanent_address){{$emps->employee->permanent_address}}@endif">
@@ -627,16 +627,15 @@
                                     <!-- -------------- /section -------------- -->
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> Joining Formalities </h6></label>
-
                                         <div class="option-group field">
                                             <label class="field option mb5">
                                                 <input type="radio" value="1" name="formalities"
                                                        id="formalities"
-                                                       @if(isset($emps))@if($emps->employee->formalities == '1')checked @endif @endif>
+                                                       @if(isset($emps->employee))@if($emps->employee->formalities == '1')checked @endif @endif>
                                                 <span class="radio"></span>Completed</label>
                                             <label class="field option mb5">
                                                 <input type="radio" value="0" name="formalities" id="formalities"
-                                                       @if(isset($emps))@if($emps->employee->formalities == '0')checked @endif @endif>
+                                                       @if(isset($emps->employee))@if($emps->employee->formalities == '0')checked @endif @endif>
                                                 <span class="radio"></span>Pending</label>
                                         </div>
                                     </div>
@@ -648,12 +647,12 @@
                                             <label class="field option mb5">
                                                 <input type="radio" value="1" name="offer_acceptance"
                                                        id="offer_acceptance"
-                                                       @if(isset($emps))@if($emps->employee->offer_acceptance == '1')checked @endif @endif>
+                                                       @if(isset($emps->employee))@if($emps->employee->offer_acceptance == '1')checked @endif @endif>
                                                 <span class="radio"></span>Completed</label>
                                             <label class="field option mb5">
                                                 <input type="radio" value="0" name="offer_acceptance"
                                                        id="offer_acceptance"
-                                                       @if(isset($emps))@if($emps->employee->offer_acceptance == '0')checked @endif @endif>
+                                                       @if(isset($emps->employee))@if($emps->employee->offer_acceptance == '0')checked @endif @endif>
                                                 <span class="radio"></span>Pending</label>
                                         </div>
                                     </div>
@@ -662,7 +661,7 @@
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> Probation Period </h6></label>
 
-                                                @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                                @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                             <select class="select2-single form-control probation_select" name="prob_period" id="probation_period" >
                                                 <option value="">Select probation period</option>
                                                     @if($emps->employee->probation_period == '0')
@@ -710,7 +709,7 @@
                                                 Date of Confirmation </h6></label>
 
                                         <div class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                 <input type="text" id="datepicker5" class="gui-input fs13" name="doc"
                                                        value="@if($emps && $emps->employee->date_of_confirmation){{$emps->employee->date_of_confirmation}}@endif"/>
                                                 <label class="field-icon">
@@ -730,7 +729,7 @@
                                         <label for="input002"><h6 class="mb20 mt40"> Department </h6></label>
                                             <select class="select2-single form-control" name="department" id="department">
                                                 <option value="">Select department</option>
-                                                @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                                @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}'    && $emps->employee)
                                                     @if($emps->employee->department == 'Marketplace')
                                                         <option value="Marketplace" selected>Marketplace</option>
                                                         <option value="Social Media">Social Media</option>
@@ -757,7 +756,7 @@
                                         <label for="input002"><h6 class="mb20 mt40"> Salary on Confirmation </h6>
                                         </label>
                                         <label for="input002" class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                 <input type="text" name="salary" id="salary" class="gui-input"
                                                        value="@if($emps && $emps->employee->salary){{$emps->employee->salary}}@endif" readonly>
                                                 <label for="input002" class="field-icon">
@@ -789,7 +788,7 @@
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> Bank Account Number </h6></label>
                                         <label for="input002" class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                 <input type="text" name="account_number" id="bank_account_number"
                                                        class="gui-input"
                                                        value="@if($emps && $emps->employee->account_number){{$emps->employee->account_number}}@endif">
@@ -810,7 +809,7 @@
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> Bank Name </h6></label>
                                         <label for="input002" class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                 <input type="text" name="bank_name" id="bank_name" class="gui-input"
                                                        value="@if($emps && $emps->employee->bank_name){{$emps->employee->bank_name}}@endif">
                                                 <label for="input002" class="field-icon">
@@ -830,7 +829,7 @@
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> IFSC Code </h6></label>
                                         <label for="input002" class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                 <input type="text" name="ifsc_code" id="ifsc_code" class="gui-input"
                                                        value="@if($emps && $emps->employee->ifsc_code){{$emps->employee->ifsc_code}}@endif">
                                                 <label for="input002" class="field-icon">
@@ -850,7 +849,7 @@
                                     <div class="section">
                                         <label for="input002"><h6 class="mb20 mt40"> PF Account Number </h6></label>
                                         <label for="input002" class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                 <input type="text" name="pf_account_number" id="pf_account_number"
                                                        class="gui-input"
                                                        value="@if($emps && $emps->employee->pf_account_number){{$emps->employee->pf_account_number}}@endif">
@@ -871,7 +870,8 @@
                                    <div class="section">
                                        <label for="input002"><h6 class="mb20 mt40"> UN Number</h6></label>
                                        <label for="input002" class="field prepend-icon">
-                                           @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                           @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
+                                               
                                               <input type="text" name="un_number" id="un_number" class="gui-input"
                                               value="@if($emps && $emps->employee->un_number){{$emps->employee->un_number}}@endif">
                                                <label for="input002" class="field-icon">
@@ -893,11 +893,11 @@
                                         <div class="option-group field">
                                             <label class="field option mb5">
                                                 <input type="radio" value="1" name="pf_status" id="pf_status"
-                                                       @if(isset($emps))@if($emps->employee->pf_status == '1')checked @endif @endif>
+                                                       @if(isset($emps->employee))@if($emps->employee->pf_status == '1')checked @endif @endif>
                                                 <span class="radio"></span>Active</label>
                                             <label class="field option mb5">
                                                 <input type="radio" value="0" name="pf_status" id="pf_status"
-                                                       @if(isset($emps))@if($emps->employee->pf_status == '0')checked @endif @endif>
+                                                       @if(isset($emps->employee))@if($emps->employee->pf_status == '0')checked @endif @endif>
                                                 <span class="radio"></span>Inactive</label>
                                         </div>
                                     </div>
@@ -916,7 +916,7 @@
                                                 Date of Resignation </h6></label>
 
                                         <div class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                 <input type="text" id="datepicker6" class="gui-input fs13" name="dor"
                                                        value="@if($emps && $emps->employee->date_of_resignation){{$emps->employee->date_of_resignation}}@endif"/>
                                                 <label class="field-icon">
@@ -936,7 +936,7 @@
                                         <label for="input002"><h6 class="mb20 mt40"> Notice Period </h6></label>
                                             <select class="select2-single form-control" name="notice_period" id="notice_period">
                                                 <option value="">Select notice period</option>
-                                                @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                                @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                     @if($emps->employee->notice_period == '1')
                                                         <option value="1" selected>1 Month</option>
                                                         <option value="2">2 Months</option>
@@ -957,7 +957,7 @@
                                                 Last Working Day </h6></label>
 
                                         <div class="field prepend-icon">
-                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}')
+                                            @if(\Route::getFacadeRoot()->current()->uri() == 'edit-emp/{id}' && $emps->employee)
                                                 <input type="text" id="datepicker7" class="gui-input fs13"
                                                        name="last_working_day"
                                                        value="@if($emps && $emps->employee->last_working_day){{$emps->employee->last_working_day}} @endif"/>
@@ -982,11 +982,11 @@
                                             <label class="field option mb5">
                                                 <input type="hidden" value="{!! csrf_token() !!}" id="token">
                                                 <input type="radio" value="1" name="full_final" id="full_final"
-                                                       @if(isset($emps))@if($emps->employee->full_final == '1')checked @endif @endif>
+                                                       @if(isset($emps->employee))@if($emps->employee->full_final == '1')checked @endif @endif>
                                                 <span class="radio"></span>Yes</label>
                                             <label class="field option mb5">
                                                 <input type="radio" value="0" name="full_final" id="full_final"
-                                                       @if(isset($emps))@if($emps->employee->full_final == '0')checked @endif @endif>
+                                                       @if(isset($emps->employee))@if($emps->employee->full_final == '0')checked @endif @endif>
                                                 <span class="radio"></span>No</label>
                                         </div>
                                     </div>

@@ -121,3 +121,11 @@
     color: #c3c4cb;
     font-size: 12px;
 }
+
+.sent{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.sent a{
+    display: flex;
+}

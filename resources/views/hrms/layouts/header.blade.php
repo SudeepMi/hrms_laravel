@@ -44,6 +44,15 @@
                         </li>
                     </ul>
             </li>
+
+            <li>
+                @if (Auth::user())
+                    <a class="dropdown-link" href="/chatbox">
+                        <span class="glyphicon glyphicon-comment"></span>
+                    </a>
+                @endif
+            </li>
+
             @endif
         </li>
         <li>
@@ -54,12 +63,12 @@
                     <span class="glyphicon glyphicon-transfer"></span>
                     <span class="hidden-xs">Check Out</span>
                 </a>
-            @else
-            <a class="dropdown-link" href="/checkin">
-                <span class="glyphicon glyphicon-user"></span>
-                <span class="hidden-xs">Check In</span>
-            </a>
-            @endif
+                @else
+                <a class="dropdown-link" href="/checkin">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <span class="hidden-xs">Check In</span>
+                </a>
+                @endif
             @endif
         </li>
         <li>
@@ -70,6 +79,7 @@
                 </a>
             @endif
         </li>
+      
         <li class="dropdown dropdown-fuse">
             <div class="navbar-btn btn-group">
         <li class="dropdown dropdown-fuse">
